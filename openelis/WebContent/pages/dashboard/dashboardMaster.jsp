@@ -145,8 +145,8 @@ basePath = path + "/";
     <div id="patientDetails" class="hide details">
         <div class='details-more-info'><span class='details-key'>Patient ID : </span><span class='details-value' id="patientId"></span></div>
         <div class='details-more-info'><span class='details-key'>Name : </span><span class='details-value' id="name"></span></div>
-        <div class='details-more-info'><span class='details-key'>Father/Husband's Name : </span><span class='details-value' id="primaryRelative"></span></div>
-        <div class='details-more-info'><span class='details-key'>Village : </span><span class='details-value' id="village"></span></div>
+       <!-- <div class='details-more-info'><span class='details-key'>Father/Husband's Name : </span><span class='details-value' id="primaryRelative"></span></div>
+        <div class='details-more-info'><span class='details-key'>Village : </span><span class='details-value' id="village"></span></div>-->
         <div class='details-more-info'><span class='details-key'>Gender : </span><span  class='details-value' id="gender"></span></div>
         <div class='details-more-info'><span class='details-key'>Age : </span><span class='details-value' id="age"></span></div>
     </div>
