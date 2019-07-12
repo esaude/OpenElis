@@ -1028,7 +1028,7 @@ jQuery(function(){
 		</td>
 	</tr>
     <% } if( supportPrimaryRelative ){ %>
-    <!-- <tr>
+		<tr style="visibility: collapse">
         <td></td>
         <td align="right">
             <bean:message key="patient.primaryRelative"/>:
@@ -1041,9 +1041,9 @@ jQuery(function(){
                          styleClass="text"
                          size="60" />
         </td>
-    </tr> -->
+    </tr> 
 	<% } if(supportMothersInitial){ %>
-	<!-- <tr>
+		<tr style="visibility: collapse">
 		<td></td>
 		<td align="right">
 			<bean:message key="patient.mother.initial"/>
@@ -1057,12 +1057,12 @@ jQuery(function(){
 				      size="1"
 				      maxlength="1" />
 		</td>
-	</tr> -->
+	</tr> 
 	<%} %>
 
     <%  if(!supportDynamicAddresses){ %>
-    <!-- <tr ><td colspan="2">&nbsp;</td></tr>
-	<tr>
+		<tr style="visibility: collapse"><td colspan="2">&nbsp;</td></tr>
+		<tr style="visibility: collapse">
 		<td >
 			<bean:message  key="person.streetAddress" />
 		</td>
@@ -1077,16 +1077,16 @@ jQuery(function(){
 					  styleClass="text"
 					  size="70" />
 		</td>
-	</tr> -->
+	</tr> 
     <%} else {%>
-        <!-- <input type="hidden" name="patientProperties.streetAddress" id="streetID"  value=""/> -->
+         <input type="hidden" name="patientProperties.streetAddress" id="streetID"  value=""/>
     <% } %>
 
     <!-- <tr ><td colspan="2">&nbsp;</td></tr> -->
 
 
     <%  if(supportDynamicAddresses){ %>
-    <!-- <tr>
+		<tr style="visibility: collapse">
         <td>
             <bean:message  key="person.streetAddress" />
         </td>
@@ -1100,14 +1100,14 @@ jQuery(function(){
                 <input name="patientProperties.addressParts.addressPartForms[<bean:write name='index'/>].value" value="<%= ((AddressPartForm)addressPart).getValue()  %>" size="60"/>
             </td>
         </tr>
-        <tr>
+		<tr style="visibility: collapse">
             <td></td>
     </logic:iterate>
-        </tr> -->
+        </tr> 
     <% } %>
 
 	<% if( FormFields.getInstance().useField(Field.AddressVillage)) { %>
-	<!-- <tr>
+		 <tr style="visibility: collapse">
 		<td></td>
 		<td align="right">
 		    <%= StringUtil.getContextualMessageForKey("person.town") %>:
@@ -1120,7 +1120,7 @@ jQuery(function(){
 					  styleClass="text"
 					  size="30" />
 		</td>
-	</tr> -->
+	</tr>  
 	<% } %>
 	<% if( supportCommune){ %>
 	<tr>
@@ -1276,10 +1276,10 @@ jQuery(function(){
 
 	</tr>
 	<% } if( supportOccupation ){ %>
-	<!--<tr>
-	<td align="right">
+	<tr style="visibility: collapse">
+	 <td align="right">
 		<bean:message  key="patient.occupation" />:
-	</td>
+	</td> 
 	 <td>
 		<nested:text name='<%=formName%>'
 				  property="patientProperties.occupation"
@@ -1288,7 +1288,7 @@ jQuery(function(){
 				  styleClass="text"
 				  size="20" />
 	</td>
-	</tr> -->
+	</tr> 
 	<% } %>
 	<% if( FormFields.getInstance().useField(Field.PatientEducation)){ %>
 		<tr>
