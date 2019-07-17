@@ -49,8 +49,11 @@
     return "<span class='percent-complete-bar' style='background:" + color + ";width:" + value + "%'></span>";
   }
 
+
   function YesNoFormatter(row, cell, value, columnDef, dataContext) {
-    return value ? "Yes" : "No";
+  //var trans=MessageResources_pt.properties
+  //var smsg=trans[label.button.yes]
+    return value ?  "SIM" : "não";
   }
 
   function CheckmarkFormatter(row, cell, value, columnDef, dataContext) {

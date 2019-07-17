@@ -630,17 +630,19 @@ var referralPage = {
 		</td>
 	</tr>
 	<tr class='<%=rowColor%>' id='<%="referralRow_" + index%>' >
+		
 		<td>
 			<select name="<%="referralItems[" + index + "].referralReasonId"%>"
 			        id='<%="referralReasonId_" + index%>'
 			        onchange='<%="markModified(\"" + index + "\"); " %>' />
 					<option value='0' ></option>
 			<logic:iterate id="optionValue" name='<%=formName %>' property="referralReasons" type="IdValuePair" >
-					<option value='<%=optionValue.getId()%>'  <%if(optionValue.getId().equals(referralItems.getReferralReasonId())) out.print("selected");%>  >
-							<bean:write name="optionValue" property="value"/>
+					<option value='<%=optionValue.getId()%>' <%if(optionValue.getId().equals(referralItems.getReferralReasonId())) out.print("selected");%>  >
+							<bean:message name="optionValue" key="referral.reason.autoReferredOut" property="value"/>
 					</option>
 			</logic:iterate>
 			</select>
+			
 		</td>
 		<td>
 			<select name='<%="referralItems[" + index + "].referredInstituteId"%>'
@@ -751,13 +753,14 @@ var referralPage = {
 				       onchange='<%="markModified(\"" + index + "\");" %>' >
 			</td>
 			<td>
+				
 				<select name='<%="referralItems[" + index + "].additionalTests[" + testIndex + "].referredTestId" %>'
 						onchange='<%="markModified(\"" + index + "\"); updateResultField(\"" + index + "_" + testIndex + "\");" %>'
 						id='<%="testSelection_" + index + "_" + testIndex %>' class="testSelection" />
 						<option value='0' ></option>
 						<logic:iterate id="optionValue" name='referralItems' property="testSelectionList" type="IdValuePair" >
-							<option value='<%=optionValue.getId()%>' <%if(optionValue.getId().equals(additionalTests.getReferredTestId())) out.print("selected"); %>  >
-								<bean:write name="optionValue" property="value"/>
+							<option value='<%=optionValue.getId()%>'   >
+								sssss
 							</option>
 						</logic:iterate>
 				</select>
