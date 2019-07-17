@@ -145,10 +145,13 @@ basePath = path + "/";
     <div id="patientDetails" class="hide details">
         <div class='details-more-info'><span class='details-key'>Patient ID : </span><span class='details-value' id="patientId"></span></div>
         <div class='details-more-info'><span class='details-key'>Name : </span><span class='details-value' id="name"></span></div>
-       <!-- <div class='details-more-info'><span class='details-key'>Father/Husband's Name : </span><span class='details-value' id="primaryRelative"></span></div>
+        <div class='details-more-info'><span class='details-key'><bean:message key="patient.birthDate"/> : </span><span class='details-value' id="dateOfBirth"></span></div>
+        <!-- <div class='details-more-info'><span class='details-key'>Father/Husband's Name : </span><span class='details-value' id="primaryRelative"></span></div>
         <div class='details-more-info'><span class='details-key'>Village : </span><span class='details-value' id="village"></span></div>-->
         <div class='details-more-info'><span class='details-key'>Gender : </span><span  class='details-value' id="gender"></span></div>
         <div class='details-more-info'><span class='details-key'>Age : </span><span class='details-value' id="age"></span></div>
+        <div class='details-more-info'><span class='details-key'><bean:message key="dashboard.Main.Contact"/> : </span><span class='details-value' id="phoneNumber"></span></div>
+   <input type="hidden" id="Estimated" name="Estimated" value="<bean:message key="patient.birthDate"/>" >
     </div>
 
 </div>
@@ -266,14 +269,26 @@ basePath = path + "/";
 
     });
 
-    var showPatientDetails = function(stNumber, firstName, middleName, lastName, primaryRelative, village, gender, age) {
+    var showPatientDetails = function(stNumber, firstName, middleName, lastName, primaryRelative, village, gender, dateOfBirth, dob, age, phoneNumber) {
         jQuery("#patientDetails").show();
         jQuery("#patientId").text(stNumber);
         jQuery("#name").text(firstName + " " + (middleName ? middleName + " " : "") + lastName);
         jQuery("#primaryRelative").text(primaryRelative?primaryRelative:"N/A");
         jQuery("#village").text(village?village:"N/A");
         jQuery("#gender").text(gender);
+
+        var splitPattern = dob.split("/");
+        if (splitPattern[0] == "xx")
+        {
+            
+            dateOfBirth= dateOfBirth.concat(" (Estimado)");
+
+        }
+
+
+        jQuery("#dateOfBirth").text(dateOfBirth);
         jQuery("#age").text(age);
+        jQuery("#phoneNumber").text(phoneNumber);
     }
 
     function onRowSelection(row) {
@@ -296,7 +311,10 @@ basePath = path + "/";
             OpenElis.Utils.getXMLValue(xhr.responseXML, 'primaryRelative'),
             getAddressValue(xhr.responseXML, villageIndex),
             OpenElis.Utils.getXMLValue(xhr.responseXML, 'gender'),
-            OpenElis.Utils.calculateAge(OpenElis.Utils.getXMLValue(xhr.responseXML, 'dob'), datePattern)
+            OpenElis.Utils.getXMLValue(xhr.responseXML, 'dateOfBirth'),
+            OpenElis.Utils.getXMLValue(xhr.responseXML, 'dob'),
+            OpenElis.Utils.calculateAge(OpenElis.Utils.getXMLValue(xhr.responseXML, 'dob'), datePattern),
+            OpenElis.Utils.getXMLValue(xhr.responseXML, 'phoneNumber')
         );
     }
 
