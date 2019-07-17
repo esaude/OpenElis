@@ -758,10 +758,9 @@ var referralPage = {
 						onchange='<%="markModified(\"" + index + "\"); updateResultField(\"" + index + "_" + testIndex + "\");" %>'
 						id='<%="testSelection_" + index + "_" + testIndex %>' class="testSelection" />
 						<option value='0' ></option>
-						<logic:iterate id="optionValue" name='referralItems' property="testSelectionList" type="IdValuePair" >
-							<option value='<%=optionValue.getId()%>'   >
-								sssss
-							</option>
+						<option value='<%=optionValue.getId()%>' <%if(optionValue.getId().equals(additionalTests.getReferredTestId())) out.print("selected"); %>  >
+							<bean:write name="optionValue" property="value"/>
+						</option>
 						</logic:iterate>
 				</select>
 			</td>

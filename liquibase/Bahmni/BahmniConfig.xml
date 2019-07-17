@@ -1452,7 +1452,7 @@
         <column name="id" valueNumeric=" nextval( 'referral_reason_seq' ) "/>
         <column name="name" value="Auto Referred Out"/>
         <column name="description" value="Auto Referred Out"/>
-        <column name="display_key" value="referral.reason.autoReferredOut">/>
+        <column name="display_key" value="referral.reason.autoReferredOut"/>
         <column name="lastupdated" valueDate=" now() "/>
     </insert>
     </changeSet>
