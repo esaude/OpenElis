@@ -672,7 +672,7 @@ function  /*void*/ setPatientInfo(nationalID, ST_ID, subjectNumber, lastName, fi
 
 	// run this b/c dynamically populating the fields does not constitute an onchange event to populate the patmgmt tile
 	// this is the fx called by the onchange event if manually changing the fields
-	updatePatientEditStatus();
+	updatePatientEditStatus();patient
 
 }
 
@@ -685,9 +685,10 @@ function validatePatientId() {
 	var patientId = $("ST_ID").value;
 	if (patientId) {
 		if (patientId.search(<%= stNumberFormat %>) == -1) {
-			alert("PatientID does not conform to the allowed format.");
+			alert("PatientID does not confirm.");
 			$("ST_ID").value = "";
 			makeDirty();
+			
 		}
 	}
 }
@@ -844,7 +845,13 @@ jQuery(function(){
         <td>
             <div>
                 <input id="hiddenPatientProperties" name="patientProperties.STnumber" type="hidden">
-                <input type="text" id="ST_ID" onchange="patientIdChanged();">
+                <input type="text" id="ST_ID" maxlength="17" placeholder="HA/YEAR/SEQ" onchange="patientIdChanged();">
+				<script>
+ function change(f)
+ {
+   f.value = f.value.slice(0,8)+"-"+f.value.slice(0,4)+"-"+f.value.slice(0,5);
+ }
+</script>
             </div>
         </td>
         <%} %>
