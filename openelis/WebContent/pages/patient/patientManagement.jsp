@@ -21,7 +21,7 @@
 <%@ taglib prefix="p" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <bean:define id="formName"		value='<%=(String) request.getAttribute(IActionConstants.FORM_NAME)%>' />
 <bean:define id="patientProperties" name='<%=formName%>' property='patientProperties' type="PatientManagmentInfo" />
 <bean:define id="collapse" name='<%=formName%>' property='collapsePatientInfo' type="Boolean" />
@@ -806,6 +806,7 @@ jQuery(function(){
 });
 
 </script>
+<input class="Pid" type=text maxlength=19 placeholder="HA/YEAR/SEQ"/>
 <nested:hidden name='<%=formName%>' property="patientProperties.currentDate" styleId="currentDate"/>
 
 <div id="PatientPage" style="display:inline"  >
@@ -845,12 +846,44 @@ jQuery(function(){
         <td>
             <div>
                 <input id="hiddenPatientProperties" name="patientProperties.STnumber" type="hidden">
-                <input type="text" id="ST_ID" maxlength="17" placeholder="HA/YEAR/SEQ" onchange="patientIdChanged();">
+                <input type="text" class="Pid" id="ST_ID" maxlength="17" placeholder="HA/YEAR/SEQ" onchange="patientIdChanged();">
 				<script>
- function change(f)
- {
-   f.value = f.value.slice(0,8)+"-"+f.value.slice(0,4)+"-"+f.value.slice(0,5);
- }
+//  function change(f)
+//  {
+//    f.value = f.value.slice(0,8)+"-"+f.value.slice(0,4)+"-"+f.value.slice(0,5);
+//  }
+
+
+
+
+ function format(input, format, sep) {
+    var output = "";
+    var id = 0;
+    for (var i = 0; i < format.length && id < input.length; i++) {
+        output += input.substr(id, format[i]);
+        if (id + format[i] < input.length) output += sep;
+        id += format[i];
+    }
+
+    output += input.substr(id);
+
+    return output;
+}
+
+$('.Pid').keyup(function() {
+    var foo = $(this).val().replace(/-/g, ""); // remove hyphens
+    // You may want to remove all non-digits here
+    // var foo = $(this).val().replace(/\D/g, "");
+
+    if (foo.length > 0) {
+        foo = format(foo, [8, 4, 5], "-");
+    }
+  
+    
+    $(this).val(foo);
+});
+
+
 </script>
             </div>
         </td>
