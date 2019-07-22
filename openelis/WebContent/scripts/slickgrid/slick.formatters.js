@@ -49,8 +49,9 @@
     return "<span class='percent-complete-bar' style='background:" + color + ";width:" + value + "%'></span>";
   }
 
+
   function YesNoFormatter(row, cell, value, columnDef, dataContext) {
-    return value ? "Yes" : "No";
+      return value ?  "SIM" : "não";
   }
 
   function CheckmarkFormatter(row, cell, value, columnDef, dataContext) {
