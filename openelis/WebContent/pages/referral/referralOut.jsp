@@ -1,4 +1,4 @@
-    <%@ page language="java" contentType="text/html; charset=utf-8" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" %>
 <%@ page import="us.mn.state.health.lims.common.action.IActionConstants,
 				us.mn.state.health.lims.referral.action.beanitems.ReferralItem,
 				us.mn.state.health.lims.referral.action.beanitems.ReferredTest,
@@ -637,7 +637,7 @@ var referralPage = {
 					<option value='0' ></option>
 			<logic:iterate id="optionValue" name='<%=formName %>' property="referralReasons" type="IdValuePair" >
 					<option value='<%=optionValue.getId()%>'  <%if(optionValue.getId().equals(referralItems.getReferralReasonId())) out.print("selected");%>  >
-							<bean:write name="optionValue" property="value"/>
+						<bean:message name="optionValue" key="referral.reason.autoReferredOut" property="value"/>
 					</option>
 			</logic:iterate>
 			</select>
