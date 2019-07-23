@@ -156,6 +156,7 @@ basePath = path + "/";
     </div>
 
 </div>
+<input type=hidden value='<bean:message key="dashboard.Main.Estimated"/>' id=estimated_translation >
 
 <script type="text/javascript">
     var options = {
@@ -279,9 +280,10 @@ basePath = path + "/";
         jQuery("#gender").text(gender);
 
         var splitPattern = dob.split("/");
+        var value_estimated=$(estimated_translation).value;
         if (splitPattern[0] == "xx")
         {
-            dateOfBirth= dateOfBirth.concat(" (Estimado)");
+            dateOfBirth= dateOfBirth.concat(" ("+value_estimated+")");
         }
         jQuery("#dateOfBirth").text(dateOfBirth);
         jQuery("#age").text(age);
