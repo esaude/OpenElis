@@ -280,12 +280,8 @@ basePath = path + "/";
         var splitPattern = dob.split("/");
         if (splitPattern[0] == "xx")
         {
-            
             dateOfBirth= dateOfBirth.concat(" (Estimado)");
-
         }
-
-
         jQuery("#dateOfBirth").text(dateOfBirth);
         jQuery("#age").text(age);
         jQuery("#phoneNumber").text(phoneNumber);

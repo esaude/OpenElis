@@ -26,11 +26,6 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.Set;
-
 import com.thoughtworks.xstream.XStream;
 import org.apache.commons.validator.GenericValidator;
 import us.mn.state.health.lims.address.dao.AddressPartDAO;
@@ -56,7 +51,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class PatientXmlCreator {
-    
+
     private String ADDRESS_PART_DEPT_ID;
     private String ADDRESS_PART_COMMUNE_ID;
     private String ADDRESS_PART_VILLAGE_ID;
@@ -91,7 +86,7 @@ public class PatientXmlCreator {
 
         Timestamp ts=patient.getBirthDate();  
         Date date=ts;    
-	    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); 
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); 
         String dateOfBirth = formatter.format(date);   
 
         XMLUtil.appendKeyValue("ID", patient.getId(), xml);
