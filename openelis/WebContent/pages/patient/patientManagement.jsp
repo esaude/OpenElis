@@ -21,7 +21,7 @@
 <%@ taglib prefix="p" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 <bean:define id="formName"		value='<%=(String) request.getAttribute(IActionConstants.FORM_NAME)%>' />
 <bean:define id="patientProperties" name='<%=formName%>' property='patientProperties' type="PatientManagmentInfo" />
 <bean:define id="collapse" name='<%=formName%>' property='collapsePatientInfo' type="Boolean" />
@@ -44,6 +44,14 @@
 	boolean patientIDRequired = true;
 	boolean patientNamesRequired = true;
 	boolean patientAgeRequired = true;
+	boolean patientHF = true;
+
+	boolean patientSC = true;
+	boolean patientyr = true;
+	boolean patientseq = true;
+
+	
+	
 	boolean patientGenderRequired = true;
     boolean supportDynamicAddresses = false;
     boolean supportfirstNameFirst;
@@ -115,15 +123,39 @@ var supportMaritialStatus = <%= FormFields.getInstance().useField(Field.PatientM
 var supportHealthRegion = <%= FormFields.getInstance().useField(Field.PatientHealthRegion) %>;
 var supportHealthDistrict = <%= FormFields.getInstance().useField(Field.PatientHealthDistrict) %>;
 var supportPrimaryRelative = <%= supportPrimaryRelative %>;
+var patientHF= <%= patientHF %>;
+
+  
+
+var patientSC = <%= patientSC %>;
+var patientyr = <%= patientyr %>;
+var patientseq= <%= patientseq %>;
+
 
 var pt_invalidElements = [];
 var pt_requiredFields = new Array( );
-if( patientAgeRequired){
-	pt_requiredFields.push("dateOfBirthID");
+if( patientHF){
+	pt_requiredFields.push("HA");
 }
+
+
+
+if( patientSC){
+	pt_requiredFields.push("SC");
+}
+if( patientyr){
+	pt_requiredFields.push("yr");
+}
+if( patientseq){
+	pt_requiredFields.push("seq");
+}
+
 if( patientGenderRequired){
 	pt_requiredFields.push("genderID");
 }
+
+
+
 if( patientNamesRequired){
 	pt_requiredFields.push("firstNameID");
 }
@@ -207,7 +239,7 @@ function pt_patientRequiredFieldsAllEmpty() {
 
 function /*void*/ pt_setSave()
 {
-	if( window.setSave ){
+		if( window.setSave ){
 		setSave();
 	}else{
 		$("saveButtonId").disabled = !patientFormValid();
@@ -682,10 +714,18 @@ function patientIdChanged(){
 }
 
 function validatePatientId() {
+	var Ha= $(HA).value;
+	var service_code = $(SC).value;
+	var year = $(yr).value;
+	var sequence_code= $(seq).value;
+    var patientInfo= Ha + "/" + service_code + "/" + year +"/" + sequence_code;
+	document.getElementById("ST_ID").value = patientInfo;
 	var patientId = $("ST_ID").value;
+	var patient_alert=$(patientalert).value
 	if (patientId) {
 		if (patientId.search(<%= stNumberFormat %>) == -1) {
-			alert("PatientID does not confirm.");
+			
+			alert(patient_alert);yr
 			$("ST_ID").value = "";
 			makeDirty();
 			
@@ -693,8 +733,53 @@ function validatePatientId() {
 	}
 }
 
-function  /*void*/ updatePatientEditStatus() {
-	if (updateStatus == "noAction") {
+function validateHa()
+{
+	var hf_value=$(HA).value;
+    var hf_code=$(hfcode).value;
+	 if(hf_value.length<8)
+	 {
+	
+		alert(hf_code);	
+		$(HA).value = "";	
+		return false;
+     } 
+	
+}
+
+function validateSeq()
+{
+	var seq_value=$(seq).value;
+	var seq_code=$(seqcode).value
+     if(seq_value.length<5)
+	 {
+		 alert(seq_code);
+		 $(seq).value = "";
+		 return false;
+		 
+	 }
+}
+
+function year()
+{
+	var yearval=$(yr).value
+	var date = new Date();
+     var year = date.getFullYear();
+	 var year_alert=$(yearalert).value;
+	if(yearval>year)
+	{
+		alert(year_alert);
+		$(yr).value = "";
+		return false;
+		
+	}
+	pt_setSave()
+}
+
+function  /*void*/ updatePatientEditStatus() 
+{
+	if (updateStatus == "noAction")
+	{
 		setUpdateStatus("update");
 	}
 
@@ -806,7 +891,6 @@ jQuery(function(){
 });
 
 </script>
-<input class="Pid" type=text maxlength=19 placeholder="HA/YEAR/SEQ"/>
 <nested:hidden name='<%=formName%>' property="patientProperties.currentDate" styleId="currentDate"/>
 
 <div id="PatientPage" style="display:inline"  >
@@ -829,8 +913,43 @@ jQuery(function(){
 
 	<div id="PatientDetail">
 	<h2><bean:message key="patient.information"/></h2>
-	<table width="100%" border="0">
-	<tr>
+	<table width="80%" border="0">
+		<tr> 
+				<td>
+					Patient NID :
+						<% if( patientIDRequired){ %>
+							<span class="requiredlabel">*</span>
+						<% } %>
+					</td>
+				<td>   
+								<input type="hidden" value='<bean:message key="hf.alert"/>' id=hfcode >
+								<input type="hidden" value='<bean:message key="patient.alert"/>' id=patientalert>
+								<input type="hidden" value='<bean:message key="sequence.alert"/>' id=seqcode >
+								<input type="hidden" value='<bean:message key="year.alert"/>' id=yearalert >
+								<input id="hiddenPatientProperties" name="patientProperties.STnumber" type="hidden"> 
+								<input type="hidden"  id="ST_ID" class="cardInput" maxlength="19" placeholder="HF/SC/YEAR/SEQ" onchange="patientIdChanged()">
+							</td>
+			
+					<td><bean:message key="hf.code"/> : <input type="text"  id="HA" maxlength="8" size="8" onchange="validateHa(); patientIdChanged();" > <% if(patientHF){ %>
+						<span class="requiredlabel">*</span>
+					<% } %></td>
+					<td><bean:message key="service.code"/> :<input type="text"  id="SC" value ="01" maxlength="2" size="2"> <% if(patientSC){ %>
+						<span class="requiredlabel">*</span>
+					<% } %></td>
+				    <td><bean:message key="label.year"/> : <input type="text"  id="yr" maxlength="4" size="4"  onchange="year(); patientIdChanged();"> <% if(patientyr){ %>
+						<span class="requiredlabel">*</span>
+					<% } %></td>
+					<td><bean:message key="Sequential.code"/> : <input type="text"  id="seq" maxlength="5"  onchange="validateSeq(); patientIdChanged();">
+						<% if(patientseq){ %>
+							<span class="requiredlabel">*</span>
+						<% } %></td>
+		</tr>
+		<tr>
+			<td></td>
+		</tr>
+	</table>
+	<table>
+		<tr style="visibility: collapse">		
         <% if( !supportSubjectNumber){ %>
         <td>
             <bean:message key="patient.externalId"/>
@@ -845,50 +964,12 @@ jQuery(function(){
         </td>
         <td>
             <div>
-                <input id="hiddenPatientProperties" name="patientProperties.STnumber" type="hidden">
-                <input type="text" class="Pid" id="ST_ID" maxlength="17" placeholder="HA/YEAR/SEQ" onchange="patientIdChanged();">
-				<script>
-//  function change(f)
-//  {
-//    f.value = f.value.slice(0,8)+"-"+f.value.slice(0,4)+"-"+f.value.slice(0,5);
-//  }
-
-
-
-
- function format(input, format, sep) {
-    var output = "";
-    var id = 0;
-    for (var i = 0; i < format.length && id < input.length; i++) {
-        output += input.substr(id, format[i]);
-        if (id + format[i] < input.length) output += sep;
-        id += format[i];
-    }
-
-    output += input.substr(id);
-
-    return output;
-}
-
-$('.Pid').keyup(function() {
-    var foo = $(this).val().replace(/-/g, ""); // remove hyphens
-    // You may want to remove all non-digits here
-    // var foo = $(this).val().replace(/\D/g, "");
-
-    if (foo.length > 0) {
-        foo = format(foo, [8, 4, 5], "-");
-    }
-  
-    
-    $(this).val(foo);
-});
-
-
-</script>
-            </div>
+				<input id="hiddenPatientProperties" name="patientProperties.STnumber" type="hidden">  
+				
+                       
         </td>
         <%} %>
-    </tr>
+	</tr>
     <% if( supportSubjectNumber){ %>
     <tr >
         <td width="5%">&nbsp;

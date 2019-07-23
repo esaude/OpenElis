@@ -504,7 +504,7 @@ var referralPage = {
 </script>
 
 <span>
-    <bean:message key="patient.ST.number"/>
+    <bean:message key="patient.nid"/>
     <input id="patientSTNumber"></input>
     <button type="button" onclick="searchTestsByPatient()"><bean:message key="referral.search.patient"/></button>
     <button type="button" onclick="showAllTests()"><bean:message key="referral.all"/></button>

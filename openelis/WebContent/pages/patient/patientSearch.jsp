@@ -277,7 +277,7 @@ function /*void*/ handleEnterEvent( ){
 
 function /*void*/ dirtySearchInfo(e){ 
 	var code = e ? e.which : window.event.keyCode;
-	if( code != 13 ){
+	if( code != 19 ){
 		newSearchInfo = true; 
 	}
 }			
@@ -312,7 +312,7 @@ function /*void*/ dirtySearchInfo(e){
         <% } %>
 		<% if( supportSTNumber ){ %>
             <td class="searchST" width="20%">
-                <bean:message key="patient.ST.number"/>
+                <bean:message key="patient.nid"/>
             </td>
         <%} %>
 		<% if( supportSubjectNumber ){ %>
