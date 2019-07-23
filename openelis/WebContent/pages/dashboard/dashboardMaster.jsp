@@ -156,7 +156,7 @@ basePath = path + "/";
     </div>
 
 </div>
-<input type=hidden value='<bean:message key="dashboard.Main.Estimated"/>' id=estimated_translation >
+<input type="hidden" value='<bean:message key="dashboard.Main.Estimated"/>' id="estimated_translation" >
 
 <script type="text/javascript">
     var options = {
