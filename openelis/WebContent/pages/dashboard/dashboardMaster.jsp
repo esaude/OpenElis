@@ -146,13 +146,12 @@ basePath = path + "/";
 
         <div class='details-more-info'><span class='details-key'><bean:message key="dashboard.sample.column.patientID"/> : </span><span class='details-value' id="patientId"></span></div>
         <div class='details-more-info'><span class='details-key'><bean:message key="dashboard.sample.column.patientName"/> : </span><span class='details-value' id="name"></span></div>
-       <div class='details-more-info'><span class='details-key'><bean:message key="patient.birthDate"/> : </span><span class='details-value' id="dateOfBirth"></span></div>
+        <div class='details-more-info'><span class='details-key'><bean:message key="patient.birthDate"/> : </span><span class='details-value' id="dateOfBirth"></span></div>
         <!-- <div class='details-more-info'><span class='details-key'>Father/Husband's Name : </span><span class='details-value' id="primaryRelative"></span></div>
         <div class='details-more-info'><span class='details-key'>Village : </span><span class='details-value' id="village"></span></div>-->
-         <div class='details-more-info'><span class='details-key'><bean:message key="patient.gender"/> : </span><span  class='details-value' id="gender"></span></div>
+        <div class='details-more-info'><span class='details-key'><bean:message key="patient.gender"/> : </span><span  class='details-value' id="gender"></span></div>
         <div class='details-more-info'><span class='details-key'><bean:message key="patient.age"/> : </span><span class='details-value' id="age"></span></div>
-        <div class='details-more-info'><span class='details-key'><bean:message key="dashboard.Main.Contact"/> : </span><span class='details-value' id="phoneNumber"></span></div>
-       <input type="hidden" id="Estimated" name="Estimated" value="<bean:message key="patient.birthDate"/>" >
+        <div class='details-more-info'><span class='details-key'><bean:message key="dashboard.Main.Contact"/> : </span><span class='details-value' id="cellPhone"></span></div>
     </div>
 
 </div>
@@ -271,7 +270,7 @@ basePath = path + "/";
 
     });
 
-    var showPatientDetails = function(stNumber, firstName, middleName, lastName, primaryRelative, village, gender, dateOfBirth, dob, age, phoneNumber) {
+    var showPatientDetails = function(stNumber, firstName, middleName, lastName, primaryRelative, village, gender, dateOfBirth, dob, age, cellPhone) {
         jQuery("#patientDetails").show();
         jQuery("#patientId").text(stNumber);
         jQuery("#name").text(firstName + " " + (middleName ? middleName + " " : "") + lastName);
@@ -287,7 +286,7 @@ basePath = path + "/";
         }
         jQuery("#dateOfBirth").text(dateOfBirth);
         jQuery("#age").text(age);
-        jQuery("#phoneNumber").text(phoneNumber);
+        jQuery("#cellPhone").text(cellPhone);
     }
 
     function onRowSelection(row) {
@@ -313,7 +312,7 @@ basePath = path + "/";
             OpenElis.Utils.getXMLValue(xhr.responseXML, 'dateOfBirth'),
             OpenElis.Utils.getXMLValue(xhr.responseXML, 'dob'),
             OpenElis.Utils.calculateAge(OpenElis.Utils.getXMLValue(xhr.responseXML, 'dob'), datePattern),
-            OpenElis.Utils.getXMLValue(xhr.responseXML, 'phoneNumber')
+            OpenElis.Utils.getXMLValue(xhr.responseXML, 'cellPhone')
         );
     }
 
