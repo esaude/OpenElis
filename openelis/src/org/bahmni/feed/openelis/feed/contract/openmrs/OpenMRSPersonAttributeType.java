@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class OpenMRSPersonAttributeType {
     public static final String PRIMARY_RELATIVE = "primaryRelative";
     public static final String OCCUPATION = "occupation";
+    public static final String PRIMARY_CONTACT_NUMBER = "PRIMARY_CONTACT_NUMBER_1";
     private String display;
 
     public OpenMRSPersonAttributeType() {

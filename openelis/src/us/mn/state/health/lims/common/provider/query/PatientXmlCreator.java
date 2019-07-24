@@ -110,6 +110,7 @@ public class PatientXmlCreator {
         XMLUtil.appendKeyValue("occupation", identityMap.getIdentityValue(identityList, "OCCUPATION"), xml);
         XMLUtil.appendKeyValue("dob", patient.getBirthDateForDisplay(), xml);
         XMLUtil.appendKeyValue("dateOfBirth", dateOfBirth, xml);
+        XMLUtil.appendKeyValue("cellPhone", person.getCellPhone(), xml);
         XMLUtil.appendKeyValue("commune", getAddress(person, ADDRESS_PART_COMMUNE_ID), xml);
         XMLUtil.appendKeyValue("addressDept", getAddress(person, ADDRESS_PART_DEPT_ID), xml);
         XMLUtil.appendKeyValue("motherInitial", identityMap.getIdentityValue(identityList, "MOTHERS_INITIAL"), xml);
