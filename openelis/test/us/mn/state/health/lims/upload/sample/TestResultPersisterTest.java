@@ -183,7 +183,7 @@ public class TestResultPersisterTest{
 
     public class TestableTestResultPersister extends TestResultPersister{
 
-        private String stNumberFormat = "/([a-zA-Z]*)(\\d+)/";
+        private String stNumberFormat = ("\\d{3}");
 
         public TestableTestResultPersister(SampleSourceDAO sampleSourceDAO, TestDAO testDAO, TestResultPersisterService testResultPersisterService) {
             super(sampleSourceDAO, testDAO, testResultPersisterService);
