@@ -218,7 +218,7 @@ function onPrint(newWindow){
 </p>
 <p>
   <logic:equal name='<%=formName%>' property="usePatientNumberDirect" value="true">
-	<span><strong><%= StringUtil.getContextualMessageForKey("report.enter.subjectNumber") %>:</strong></span>
+	<span><strong><%= StringUtil.getContextualMessageForKey("patient.nid") %>:</strong></span>
   </logic:equal>
   <span>
 	  <logic:equal name='<%=formName%>' property="usePatientNumberList" value="true">

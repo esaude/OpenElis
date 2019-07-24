@@ -101,7 +101,7 @@ basePath = path + "/";
         </table>
     </div>
     <span id = "translatedColumnNames"
-        data-patientID = '<bean:message key="dashboard.sample.column.patientID"/>'
+        data-patientID = '<bean:message key="patient.nid"/>'
         data-patientName = '<bean:message key="dashboard.sample.column.patientName"/>'
         data-source = '<bean:message key="dashboard.sample.column.source"/>'
         data-sectionNames = '<bean:message key="dashboard.sample.column.sectionNames"/>'
