@@ -928,7 +928,7 @@ jQuery(function(){
 	<table width="80%" border="0">
 		<tr> 
 				<td>
-					Patient NID :
+					NID :
 						<% if( patientIDRequired){ %>
 							<span class="requiredlabel">*</span>
 						<% } %>
