@@ -144,7 +144,7 @@ basePath = path + "/";
     
     <div id="patientDetails" class="hide details">
 
-        <div class='details-more-info'><span class='details-key'><bean:message key="dashboard.sample.column.patientID"/> : </span><span class='details-value' id="patientId"></span></div>
+        <div class='details-more-info'><span class='details-key'><bean:message key="patient.nid"/> : </span><span class='details-value' id="patientId"></span></div>
         <div class='details-more-info'><span class='details-key'><bean:message key="dashboard.sample.column.patientName"/> : </span><span class='details-value' id="name"></span></div>
         <div class='details-more-info'><span class='details-key'><bean:message key="patient.birthDate"/> : </span><span class='details-value' id="dateOfBirth"></span></div>
         <!-- <div class='details-more-info'><span class='details-key'>Father/Husband's Name : </span><span class='details-value' id="primaryRelative"></span></div>
