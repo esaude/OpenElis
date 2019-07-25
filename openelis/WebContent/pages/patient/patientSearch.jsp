@@ -312,7 +312,7 @@ function /*void*/ dirtySearchInfo(e){
         <% } %>
 		<% if( supportSTNumber ){ %>
             <td class="searchST" width="20%">
-                <bean:message key="patient.ST.number"/>
+                <bean:message key="patient.nid"/>
             </td>
         <%} %>
 		<% if( supportSubjectNumber ){ %>

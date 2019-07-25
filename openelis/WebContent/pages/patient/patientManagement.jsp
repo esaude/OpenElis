@@ -21,7 +21,6 @@
 <%@ taglib prefix="p" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-
 <bean:define id="formName"		value='<%=(String) request.getAttribute(IActionConstants.FORM_NAME)%>' />
 <bean:define id="patientProperties" name='<%=formName%>' property='patientProperties' type="PatientManagmentInfo" />
 <bean:define id="collapse" name='<%=formName%>' property='collapsePatientInfo' type="Boolean" />
@@ -47,7 +46,11 @@
 	boolean patientGenderRequired = true;
     boolean supportDynamicAddresses = false;
     boolean supportfirstNameFirst;
-    boolean supportPrimaryRelative = false;
+	boolean supportPrimaryRelative = false;
+	boolean patientHF = true;
+	boolean patientSC = true;
+	boolean patientyr = true;
+	boolean patientseq = true;
     String stNumberFormat = ConfigurationProperties.getInstance().getPropertyValue(ConfigurationProperties.Property.ST_NUMBER_FORMAT);
  %>
 <%
@@ -115,9 +118,26 @@ var supportMaritialStatus = <%= FormFields.getInstance().useField(Field.PatientM
 var supportHealthRegion = <%= FormFields.getInstance().useField(Field.PatientHealthRegion) %>;
 var supportHealthDistrict = <%= FormFields.getInstance().useField(Field.PatientHealthDistrict) %>;
 var supportPrimaryRelative = <%= supportPrimaryRelative %>;
-
+var patientHF= <%= patientHF %>;
+var patientSC = <%= patientSC %>;
+var patientyr = <%= patientyr %>;
+var patientseq= <%= patientseq %>;
 var pt_invalidElements = [];
 var pt_requiredFields = new Array( );
+if( patientHF){
+	pt_requiredFields.push("HA");
+}
+if( patientSC){
+	pt_requiredFields.push("SC");
+}
+if( patientyr){
+	pt_requiredFields.push("yr");
+}
+if( patientseq){
+	pt_requiredFields.push("seq");
+}
+
+
 if( patientAgeRequired){
 	pt_requiredFields.push("dateOfBirthID");
 }
@@ -228,6 +248,21 @@ function  /*void*/ checkPhoneNumber( phone )
 	pt_setFieldValidity( valid, phone.name );
 	pt_setSave();
 }
+
+function formatCardNumberSequence(input, format = [8, 4, 5], sep="-") {
+    var output = "";
+    var id = 0;
+    for (var i = 0; i < format.length && id < input.length; i++) {
+        output += input.substr(id, format[i]);
+        if (id + format[i] < input.length) output += sep;
+        id += format[i];
+    }
+
+    output += input.substr(id);
+
+    return output;
+}
+
 
 
 function  /*void*/ setMyCancelAction(form, action, validate, parameters)
@@ -610,7 +645,19 @@ function  /*void*/ setPatientInfo(nationalID, ST_ID, subjectNumber, lastName, fi
 	clearErrors();
 
 	if ( supportNationalID) { $("nationalID").value = nationalID == undefined ? "" : nationalID; }
-	if(supportSTNumber){ $("ST_ID").value = ST_ID == undefined ? "" : ST_ID; }
+	if(supportSTNumber){	
+		 $("ST_ID").value = ST_ID == undefined ? "" : ST_ID;	 
+		 var arr = ST_ID.split('/');
+ 	     var h_f=arr[0];	
+		 var s_C=arr[1];	
+		 var y_R=arr[2];	
+		 var s_Q=arr[3];	
+
+		 $("HA").value = ST_ID == undefined ? "" : h_f;
+		 $("SC").value = ST_ID == undefined ? "" : s_C;
+		 $("yr").value = ST_ID == undefined ? "" : y_R;
+		 $("seq").value = ST_ID == undefined ? "" : s_Q;	 
+		  }
 	if(supportSubjectNumber){ $("subjectNumberID").value = subjectNumber == undefined ? "" : subjectNumber; }
 	$("lastNameID").value = lastName == undefined ? "" : lastName;
 	$("firstNameID").value = firstName == undefined ? "" : firstName;
@@ -671,27 +718,78 @@ function  /*void*/ setPatientInfo(nationalID, ST_ID, subjectNumber, lastName, fi
 	if(supportPatientType){document.getElementById("patientTypeID").selectedIndex = patientType == undefined ? 0 : patientType; }
 
 	// run this b/c dynamically populating the fields does not constitute an onchange event to populate the patmgmt tile
-	// this is the fx called by the onchange event if manually changing the fields
-	updatePatientEditStatus();
+	// this is the fx called by the onchangeonchangeonchange event if manually changing the fields
+	updatePatientEditStatus();patient
 
 }
 
-function patientIdChanged(){
-	validatePatientId()
+function patientIdChanged(){	
+	validatePatientId();
     updatePatientEditStatus();
 }
 
+function patientCardInputFieldChange(){
+	var cardInputText = document.getElementById("ST_ID").value;  
+	var nid = cardInputText.replace(/-/g, "");
+	if (nid.length > 0) {
+        nid = formatCardNumberSequence(Nid, [8,2,4,5], "-");
+    }
+	document.getElementById("ST_ID").value = nid;
+}
+
 function validatePatientId() {
+	var Ha= $(HA).value;
+	var sc1 = $(SC).value;
+	var yr1 = $(yr).value;
+	var seq1= $(seq).value;
+	var patientInfo= Ha + "/" + sc1 + "/" + yr1 +"/" + seq1;
+	document.getElementById("ST_ID").value = patientInfo;
 	var patientId = $("ST_ID").value;
+	var patient_alert=$("patientalert").value
 	if (patientId) {
 		if (patientId.search(<%= stNumberFormat %>) == -1) {
-			alert("PatientID does not conform to the allowed format.");
+			alert(patient_alert);
 			$("ST_ID").value = "";
-			makeDirty();
+			makeDirty();	
 		}
 	}
 }
 
+function validateHa()
+{
+	
+	var Ha2=$(HA).value;
+    var hf_code=$(hfcode).value;
+	 if(Ha2.length<8)
+	 {
+		alert(hf_code);
+		$(HA).value = "";
+		
+	} 
+}
+function validateSeq()
+{
+	var seq2=$(seq).value;
+	var seq_code=$(seqcode).value
+     if(seq2.length<5)
+	 {
+		 alert(seq_code);
+		 $(seq).value = "";
+	 } 
+}
+
+function year()
+{
+	var yearval=$(yr).value
+	var date = new Date();
+    var year = date.getFullYear();
+	var year_alert=$(yearalert).value;
+	if(yearval>year)
+	{
+		alert(year_alert);
+		$(yr).value = "";
+	}
+}
 function  /*void*/ updatePatientEditStatus() {
 	if (updateStatus == "noAction") {
 		setUpdateStatus("update");
@@ -827,10 +925,54 @@ jQuery(function(){
 
 	<div id="PatientDetail">
 	<h2><bean:message key="patient.information"/></h2>
-	<table width="100%" border="0">
+	<table width="80%" border="0">
+		<tr> 
+				<td>
+					NID :
+						<% if( patientIDRequired){ %>
+							<span class="requiredlabel">*</span>
+						<% } %>
+					</td>
+				<td>
+								<input type="hidden" value='<bean:message key="hf.alert"/>' id=hfcode >
+								<input type="hidden" value='<bean:message key="sequence.alert"/>' id=seqcode >
+								<input type="hidden" value='<bean:message key="year.alert"/>' id=yearalert >
+								<input type="hidden" value='<bean:message key="patient.alert"/>' id=patientalert >
+								<input id="hiddenPatientProperties" name="patientProperties.STnumber" type="hidden"> 
+								<input type="hidden"  id="ST_ID" class="cardInput" maxlength="19" placeholder="HF/SC/YEAR/SEQ" onchange="patientIdChanged()"></td>
+			
+					<td>	<bean:message key="hf.code"/> : <input type="text"  id="HA" maxlength="8" size="8" onchange="validateHa(); patientIdChanged();" required>
+						<% if(patientHF){ %>
+							<span class="requiredlabel">*</span>
+						<% } %></td>
+
+
+					<td>	<bean:message key="service.code"/> :<input type="text"  id="SC" value ="01" maxlength="2" size="2"> 
+						<% if(patientSC){ %>
+							<span class="requiredlabel">*</span>
+						<% } %></td>
+						
+				<td>	<bean:message key="label.year"/> : <input type="text"  id="yr" maxlength="4" size="4"  onchange="year(); patientIdChanged();">
+
+					<% if(patientyr){ %>
+						<span class="requiredlabel">*</span>
+					<% } %></td>
+
+
+					<td> <bean:message key="Sequential.code"/> : <input type="text"  id="seq" maxlength="5"  onchange="validateSeq(); patientIdChanged();">
+						<% if(patientseq){ %>
+							<span class="requiredlabel">*</span>
+						<% } %></td>
+		</tr>
+		<tr>
+			<td></td>
+		</tr>
+	</table>
+	<table>
 	<tr>
+		
         <% if( !supportSubjectNumber){ %>
-        <td>
+        <!--<td>
             <bean:message key="patient.externalId"/>
             <% if( patientIDRequired){ %>
                 <span class="requiredlabel">*</span>
@@ -843,12 +985,14 @@ jQuery(function(){
         </td>
         <td>
             <div>
-                <input id="hiddenPatientProperties" name="patientProperties.STnumber" type="hidden">
-                <input type="text" id="ST_ID" onchange="patientIdChanged();">
-            </div>
+				<input id="hiddenPatientProperties" name="patientProperties.STnumber" type="hidden">  
+				
+             <input type="text"  id="ST_ID" class="cardInput" maxlength="19" placeholder="HA//YEAR/SEQ" onkeyup="patientCardInputFieldChange()" onchange="patientIdChanged()">
+				
+           
         </td>
-        <%} %>
-    </tr>
+        <%} %>-->
+	</tr>
     <% if( supportSubjectNumber){ %>
     <tr >
         <td width="5%">&nbsp;
@@ -1028,7 +1172,7 @@ jQuery(function(){
 		</td>
 	</tr>
     <% } if( supportPrimaryRelative ){ %>
-    <tr>
+		<tr style="visibility: collapse">
         <td></td>
         <td align="right">
             <bean:message key="patient.primaryRelative"/>:
@@ -1041,9 +1185,9 @@ jQuery(function(){
                          styleClass="text"
                          size="60" />
         </td>
-    </tr>
+    </tr> 
 	<% } if(supportMothersInitial){ %>
-	<tr>
+		<tr style="visibility: collapse">
 		<td></td>
 		<td align="right">
 			<bean:message key="patient.mother.initial"/>
@@ -1057,12 +1201,12 @@ jQuery(function(){
 				      size="1"
 				      maxlength="1" />
 		</td>
-	</tr>
+	</tr> 
 	<%} %>
 
     <%  if(!supportDynamicAddresses){ %>
-    <tr ><td colspan="2">&nbsp;</td></tr>
-	<tr>
+		<tr style="visibility: collapse"><td colspan="2">&nbsp;</td></tr>
+		<tr style="visibility: collapse">
 		<td >
 			<bean:message  key="person.streetAddress" />
 		</td>
@@ -1077,16 +1221,16 @@ jQuery(function(){
 					  styleClass="text"
 					  size="70" />
 		</td>
-	</tr>
+	</tr> 
     <%} else {%>
-        <input type="hidden" name="patientProperties.streetAddress" id="streetID"  value=""/>
+         <input type="hidden" name="patientProperties.streetAddress" id="streetID"  value=""/>
     <% } %>
 
-    <tr ><td colspan="2">&nbsp;</td></tr>
+    <!-- <tr ><td colspan="2">&nbsp;</td></tr> -->
 
 
     <%  if(supportDynamicAddresses){ %>
-    <tr>
+		<tr style="visibility: collapse">
         <td>
             <bean:message  key="person.streetAddress" />
         </td>
@@ -1100,14 +1244,14 @@ jQuery(function(){
                 <input name="patientProperties.addressParts.addressPartForms[<bean:write name='index'/>].value" value="<%= ((AddressPartForm)addressPart).getValue()  %>" size="60"/>
             </td>
         </tr>
-        <tr>
+		<tr style="visibility: collapse">
             <td></td>
     </logic:iterate>
-        </tr>
+        </tr> 
     <% } %>
 
 	<% if( FormFields.getInstance().useField(Field.AddressVillage)) { %>
-	<tr>
+		 <tr style="visibility: collapse">
 		<td></td>
 		<td align="right">
 		    <%= StringUtil.getContextualMessageForKey("person.town") %>:
@@ -1120,7 +1264,7 @@ jQuery(function(){
 					  styleClass="text"
 					  size="30" />
 		</td>
-	</tr>
+	</tr>  
 	<% } %>
 	<% if( supportCommune){ %>
 	<tr>
@@ -1276,11 +1420,11 @@ jQuery(function(){
 
 	</tr>
 	<% } if( supportOccupation ){ %>
-	<tr>
-	<td align="right">
+	<tr style="visibility: collapse">
+	 <td align="right">
 		<bean:message  key="patient.occupation" />:
-	</td>
-	<td>
+	</td> 
+	 <td>
 		<nested:text name='<%=formName%>'
 				  property="patientProperties.occupation"
 				  onchange="updatePatientEditStatus();"
@@ -1288,7 +1432,7 @@ jQuery(function(){
 				  styleClass="text"
 				  size="20" />
 	</td>
-	</tr>
+	</tr> 
 	<% } %>
 	<% if( FormFields.getInstance().useField(Field.PatientEducation)){ %>
 		<tr>
@@ -1333,6 +1477,7 @@ jQuery(function(){
 				</td>
 			</tr>
 	<% } %>
+	
 	</table>
 	</div>
 	</div>
