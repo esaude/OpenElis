@@ -89,7 +89,7 @@
 					<subreportParameterExpression><![CDATA[$P{siteLogo}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="labName1">
-					<subreportParameterExpression><![CDATA["Ministério de Saúde"]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA["Serviço Nacional de Saúde"]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="reportTitle">
 					<subreportParameterExpression><![CDATA["Relatório de Laboratório"]]></subreportParameterExpression>
