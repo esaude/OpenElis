@@ -211,7 +211,7 @@
 						<rightPen lineWidth="0.5"/>
 					</box>
 					<textElement textAlignment="Left" verticalAlignment="Middle"/>
-					<text><![CDATA[A requisitar médico]]></text>
+					<text><![CDATA[Requisitado por]]></text>
 				</staticText>
 				<textField isBlankWhenNull="true">
                     <reportElement x="100" y="94" width="365" height="14"/>
@@ -283,7 +283,7 @@
                         <rightPen lineWidth="0.5"/>
                     </box>
                     <textElement textAlignment="Center" verticalAlignment="Middle"/>
-                    <text><![CDATA[unidades]]></text>
+                    <text><![CDATA[Unidades]]></text>
                 </staticText>
             <staticText>
                 <reportElement mode="Opaque" x="293" y="128" width="44" height="14" backcolor="#CCCCCC"/>
