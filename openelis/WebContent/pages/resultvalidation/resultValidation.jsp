@@ -561,7 +561,7 @@ function enableOnlyForRemark(index, resultType, isReferredOut) {
 				<% } %>
                 <td>
                     <% if (resultList.getUploadedFilePath() != null) {%>
-                        <a href="<bean:write name="resultList" property="uploadedFilePath"/>" target="_blank">Download file</a>
+                        <a href="<bean:write name="resultList" property="uploadedFilePath"/>" target="_blank">Fazer download do arquivo</a>
                     <% }%>
                 </td>
 				<td>
@@ -621,7 +621,7 @@ function enableOnlyForRemark(index, resultType, isReferredOut) {
 	<% } %>
 
 		&nbsp;
-		<bean:write name="<%=formName%>" property="paging.currentPage"/> of
+		<bean:write name="<%=formName%>" property="paging.currentPage"/> de
 		<bean:write name="<%=formName%>" property="paging.totalPages"/>
 	</logic:notEqual>
 </div>
