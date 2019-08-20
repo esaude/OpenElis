@@ -84,7 +84,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["Completion Date: " + $P{orderFinishDate}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["data de conclusão: " + $P{orderFinishDate}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
