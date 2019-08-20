@@ -318,7 +318,7 @@ function enableOnlyForRemark(index, resultType, isReferredOut) {
 	<% } %>
 
 	&nbsp;
-	<bean:write name="<%=formName%>" property="paging.currentPage"/> of
+	<bean:write name="<%=formName%>" property="paging.currentPage"/> de
 	<bean:write name="<%=formName%>" property="paging.totalPages"/>
 	<span style="float : right" >
 	<span style="visibility: hidden" id="searchNotFound"><em><%= StringUtil.getMessageForKey("search.term.notFound") %></em></span>
