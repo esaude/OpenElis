@@ -86,10 +86,7 @@
 				</textElement>
 
 				<textFieldExpression class="java.lang.String"><![CDATA["Data de Conclusão: " + $P{orderFinishDate}]]></textFieldExpression>
-
-				<textFieldExpression class="java.lang.String"><![CDATA["data de conclusão: " + $P{orderFinishDate}]]></textFieldExpression>
-
-			</textField>
+							</textField>
 		</band>
 	</detail>
 	<columnFooter>
