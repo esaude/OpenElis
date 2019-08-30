@@ -172,7 +172,7 @@ public class PatientHaitiClinical extends HaitiPatientReport implements IReportC
 
 	@Override
 	protected String getSiteLogo() {
-		return isLNSP ? "HaitiLNSP.jpg" : "labLogo.jpg";
+		return isLNSP ? "HaitiLNSP.jpg" : "labLogo.png";
 	}
 
 	@Override

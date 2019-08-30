@@ -904,7 +904,7 @@ public abstract class HaitiPatientReport extends Report {
         Date dobDate = DateUtil.convertStringDateToSqlDate(dob);
         int months = DateUtil.getAgeInMonths(dobDate, DateUtil.getNowAsSqlDate());
         if (months > 35) {
-            return (months / 12) + " Y";
+            return (months / 12) + " A";
         } else if (months > 0) {
             return months + " M";
         } else {

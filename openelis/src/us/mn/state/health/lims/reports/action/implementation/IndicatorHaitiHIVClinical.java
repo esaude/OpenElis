@@ -107,7 +107,7 @@ public class IndicatorHaitiHIVClinical extends HaitiIndicatorReport implements I
 		if (dictionary != null) {
 			TEST_HIV_IND_ID = dictionary.getId();
 		}else{
-			dictionary = dictionaryDAO.getDictionaryEntrysByNameAndCategoryDescription("Indeterminé", "Haiti Lab");
+			dictionary = dictionaryDAO.getDictionaryEntrysByNameAndCategoryDescription("Indeterminï¿½", "Haiti Lab");
 			if (dictionary != null) {
 				TEST_HIV_IND_ID = dictionary.getId();
 			}	
@@ -118,7 +118,7 @@ public class IndicatorHaitiHIVClinical extends HaitiIndicatorReport implements I
 			CLINICAL_POSITIVE_ID = dictionary.getId();
 		}
 
-		dictionary = dictionaryDAO.getDictionaryEntrysByNameAndCategoryDescription("Négatif", "CLINICAL GENERAL");
+		dictionary = dictionaryDAO.getDictionaryEntrysByNameAndCategoryDescription("Nï¿½gatif", "CLINICAL GENERAL");
 		if (dictionary != null) {
 			CLINICAL_NEGATIVE_ID = dictionary.getId();
 		}
@@ -195,8 +195,8 @@ public class IndicatorHaitiHIVClinical extends HaitiIndicatorReport implements I
 				testName.equals("CD4 en %") ||
 				testName.equals("CD4  Compte Abs") ||
 				testName.equals("CD4 Compte en %") ||
-				testName.equals("Dénombrement des lymphocytes CD4 (mm3)") ||
-				testName.equals("Dénombrement des lymphocytes  CD4 (%)") ){
+				testName.equals("Dï¿½nombrement des lymphocytes CD4 (mm3)") ||
+				testName.equals("Dï¿½nombrement des lymphocytes  CD4 (%)") ){
 				if( firstResult.getMinNormal() == firstResult.getMaxNormal() ){
 					continue;
 				}
@@ -370,7 +370,7 @@ public class IndicatorHaitiHIVClinical extends HaitiIndicatorReport implements I
 
 	@Override
 	protected String getSiteLogo() {
-		return "labLogo.jpg";
+		return "labLogo.png";
 	}
 
 	@Override

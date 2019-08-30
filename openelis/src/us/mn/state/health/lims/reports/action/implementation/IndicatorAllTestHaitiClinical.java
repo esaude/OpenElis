@@ -33,7 +33,7 @@ public class IndicatorAllTestHaitiClinical extends IndicatorAllTestHaiti impleme
 
 	@Override
 	protected String getSiteLogo() {
-		return "labLogo.jpg";
+		return "labLogo.png";
 	}
 
 

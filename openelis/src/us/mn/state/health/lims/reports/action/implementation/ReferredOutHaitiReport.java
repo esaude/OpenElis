@@ -138,7 +138,7 @@ public class ReferredOutHaitiReport extends HaitiPatientReport implements IRepor
         super.createReportParameters();
         reportParameters.put("reportPeriod", StringUtil.getMessageForKey("reports.label.referral.title")
              + " " + lowDateStr + " - " + highDateStr);
-        reportParameters.put("reportTitle", reportLocation == null ? "" : "Renvoyé à: " + reportLocation.getOrganizationName());
+        reportParameters.put("reportTitle", reportLocation == null ? "" : "Renvoyï¿½ ï¿½: " + reportLocation.getOrganizationName());
         reportParameters.put("referralSiteName", reportLocation == null ? "" : reportLocation.getOrganizationName());
     	reportParameters.put("directorName", ConfigurationProperties.getInstance().getPropertyValue(Property.labDirectorName));
 		reportParameters.put("labName1", StringUtil.getContextualMessageForKey("report.labName.one"));
@@ -222,7 +222,7 @@ public class ReferredOutHaitiReport extends HaitiPatientReport implements IRepor
     }
 	@Override
 	protected String getSiteLogo() {
-		return "labLogo.jpg";
+		return "labLogo.png";
 	}
 	@Override
 	protected void postSampleBuild() {
