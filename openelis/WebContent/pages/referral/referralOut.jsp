@@ -24,7 +24,13 @@
 <script type="text/javascript" src="scripts/jquery.ui.js?ver=<%= Versioning.getBuildNumber() %>"></script>
 <script type="text/javascript" src="scripts/jquery.asmselect.js?ver=<%= Versioning.getBuildNumber() %>"></script>
 <script type="text/javascript" src="scripts/utilities.js?ver=<%= Versioning.getBuildNumber() %>"></script>
-
+<style>
+		#upload_button {
+		  display: inline-block;
+		}
+		#upload_button input[type=file] {
+		  display:none;
+		}</style>
 <link rel="stylesheet" type="text/css" href="css/jquery.asmselect.css?ver=<%= Versioning.getBuildNumber() %>" />
 <script type="text/javascript">
 
@@ -730,8 +736,13 @@ var referralPage = {
         </td>
 
         <td>
-            <input type="file" name='<%="referralItems["+index+"].uploadedFile"%>' onchange='<%="markModified(" + index + ");"%>'>
-        </td>
+				<div id="upload_button" style="width:160px; border: 1px solid;border-color: rgba(0,0,255,0.25);border-radius: 5px; background-color: #e7e7e7; color: black; height: 20px; text-align: center;padding-top: 4px;">
+						<label>
+						  <input type="file" ngf-select ng-model="new_files" ng-change="fs.uploadFiles(new_files)" multiple name='<%="referralItems["+index+"].uploadedFile"%>' onchange='<%="markModified(" + index + ");"%>'>
+						  <span class="btn btn btn-lg" >Escolha o ficheiro</span>
+						</label>
+					  </div>
+                    </td>
 	</tr>
 	<logic:notEmpty name="referralItems"  property="additionalTests" >
 	<logic:iterate id="additionalTests" name="referralItems"  property="additionalTests" indexId="testIndex" type="ReferredTest" >

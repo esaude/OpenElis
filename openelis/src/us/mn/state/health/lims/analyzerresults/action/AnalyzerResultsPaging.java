@@ -142,10 +142,10 @@ public class AnalyzerResultsPaging {
 				String currentAccession = null;
 
 				for (AnalyzerResultItem resultItem : resultList) {
-					if (!resultItem.getAccessionNumber().equals(currentAccession)) {
+					
 						currentAccession = resultItem.getAccessionNumber();
 						mappingList.add(new IdValuePair(currentAccession, pageString));
-					}
+				
 				}
 
 			}

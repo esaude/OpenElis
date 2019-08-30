@@ -44,7 +44,7 @@ public class ResultsPaging {
 		if (resultPage != null) {
 			PropertyUtils.setProperty(dynaForm, "testResult", resultPage);
 			PropertyUtils.setProperty(dynaForm, "paging", paging.getPagingBeanWithSearchMapping(1, request.getSession()));
-		}
+			}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -69,7 +69,7 @@ public class ResultsPaging {
 	@SuppressWarnings("unchecked")
 	public void updatePagedResults(HttpServletRequest request, DynaActionForm dynaForm) {
         PagingBean bean = (PagingBean) dynaForm.get("paging");
-
+       
 		paging.updatePagedResults(request.getSession(), bean, pagingHelper);
 	}
 
@@ -82,26 +82,26 @@ public class ResultsPaging {
 
 		public void createPages(List<TestResultItem> tests, List<List<TestResultItem>> pagedResults) {
 			List<TestResultItem> page = new ArrayList<>();
-            int pagingSize = Integer.parseInt(ConfigurationProperties.getInstance().getPropertyValue(ConfigurationProperties.Property.RESULTS_PAGE_SIZE));
-
-			String accessionSequenceNumber = null;
+             int pagingSize = Integer.parseInt(ConfigurationProperties.getInstance().getPropertyValue(ConfigurationProperties.Property.RESULTS_PAGE_SIZE));
+             
+            String accessionSequenceNumber = null;
 			int resultCount = 0;
 
-			for (TestResultItem item : tests) {
+         for (TestResultItem item : tests) {
 				if (accessionSequenceNumber != null && !accessionSequenceNumber.equals(item.getSequenceAccessionNumber())) {
 					resultCount = 0;
 					accessionSequenceNumber = null;
 					pagedResults.add(page);
 					page = new ArrayList<>();
 				}
-                if (resultCount >= pagingSize) {
+				  if (resultCount >= pagingSize) {
 					accessionSequenceNumber = item.getSequenceAccessionNumber();
 				}
 
 				page.add(item);
 				resultCount++;
 			}
-
+			
 			if (!page.isEmpty() || pagedResults.isEmpty()) {
 				pagedResults.add(page);
 			}
@@ -137,14 +137,14 @@ public class ResultsPaging {
 			for( List<TestResultItem> resultList : allPages){
 				page++;
 				String pageString = String.valueOf(page);
-				
+
 				String currentAccession = null;
-				
-				for( TestResultItem resultItem : resultList){
-					if( !resultItem.getAccessionNumber().equals(currentAccession)){
+
+			for( TestResultItem resultItem : resultList){				
+						
 						currentAccession = resultItem.getAccessionNumber();
 						mappingList.add( new IdValuePair(currentAccession, pageString));
-					}
+					
 				}
 				
 			}
