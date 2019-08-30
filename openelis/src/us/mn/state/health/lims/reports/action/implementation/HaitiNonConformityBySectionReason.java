@@ -47,7 +47,7 @@ public class HaitiNonConformityBySectionReason extends NonConformityBySectionRea
 			reportParameters.put("labName1", ConfigurationProperties.getInstance().getPropertyValue(Property.SiteName));
 			reportParameters.put("labName2", "");
 		} else {
-			reportParameters.put("siteLogo", useLogo ? "labLogo.jpg" : null);
+			reportParameters.put("siteLogo", useLogo ? "labLogo.png" : null);
 			reportParameters.put("labName1", ConfigurationProperties.getInstance().getPropertyValue(Property.SiteName));
 			reportParameters.put("labName2", " ");
 		}

@@ -73,7 +73,7 @@ public class HaitiLNSPFollowupRequiredByLocation extends HaitiIndicatorReport {
 
 	@Override
 	protected String getSiteLogo(){
-		return "labLogo.jpg";
+		return "labLogo.png";
 	}
 
 }
