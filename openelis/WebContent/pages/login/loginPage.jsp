@@ -35,39 +35,62 @@ function submitOnClick(button){
 }
 
 </script>
+<style>
 
-<table width="100%">
-<tr>
-    <td width="50%" valign="top">
-        <table width="95%">
-        <tr>
-            <td width="20%">&nbsp;</td>
-            <td colspan="2">
-                <bean:message key="login.notice.message"/>
-            </td>
-            <td width="20%">&nbsp;</td>
-        </tr>
-        <tr>
-            <td width="20%">&nbsp;<br/><br/></td>
-            <td colspan="2">
+.elis-login-text {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 900;
+  position: relative;
+  top: 10px;
+  left: 0;
+  width: 100%;
+}
+
+.elis-wrapper{
+    margin-right:auto;
+  height: 100%;
+}
+    </style>
+    <div class=elis-wrapper>
+<table width="100%" style="margin: 0 auto" align="center">
+    <tr>
+        <td align="center" valign="top">
+						<img src="images/flag_of_mozambique.png" alt="flag" height="100px"
+						width="150px" /><br/>
+        </td>
+    </tr>
+    <tr>
+		<td width="50%" style="margin: 0 auto">
+            <table width="100%" style="margin: 0 auto" align="center">
+				<tr>
+					<td colspan="3" align=center style="padding-bottom:0.5%" >
+					  <p class=elis-login-text style="color: #669999;">  <bean:message key="LOGIN_PAGE_HEADER_TEXT_1"/><br>
+					   <bean:message key="LOGIN_PAGE_HEADER_TEXT_2"/><br>
+						<bean:message key="LOGIN_PAGE_HEADER_TEXT_3"/></p>
+					</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
                 <%= StringUtil.getContextualMessageForKey("login.notice.notification") %>
-            </td>
-            <td width="20%">&nbsp;</td>
-        </tr>
-        </table>
-        <br>
-        <table width="95%">
+        </td>
+    </tr>
+</table>
+        <table style="margin-left: 35%;margin-right: 35%">
         <tr>
             <td width="20%">&nbsp;</td>
-            <td width="10%" noWrap><bean:message key="login.msg.userName"/>:</td>
+            <td width="10%" style="font-size: 15px" noWrap><b><bean:message key="login.msg.userName"/>:<b></td>
             <td colspan="2" align="left">
                 <%--bugzilla 2173, 2376--%>
                 <html:text name="<%=formName%>" property="loginName" onkeypress="submitOnEnter(event)"/>
             </td>
         </tr>
         <tr>
-            <td width="20%">&nbsp;</td>
-            <td width="10%" noWrap><bean:message key="login.msg.password"/>:</td>
+            <td width="20%" >&nbsp;</td>
+            <td width="10%" style="font-size: 15px"noWrap><b><bean:message key="login.msg.password"/>:</b></td>
             <td colspan="2" align="left">
                 <%--bugzilla 2173, 2376--%>
                 <html:password name="<%=formName%>" property="password" onkeypress="submitOnEnter(event)"/>
@@ -80,4 +103,4 @@ function submitOnClick(button){
 
 <app:javascript formName="loginForm"/>
 
-
+</div>
