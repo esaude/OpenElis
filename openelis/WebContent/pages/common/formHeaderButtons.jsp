@@ -11,7 +11,7 @@
 	if(null != request.getAttribute(IActionConstants.FORM_NAME))
 	{
 %>
-<h1>
+<h1 style="font-weight: normal">
 	<logic:notEmpty
 		name="<%=IActionConstants.PAGE_SUBTITLE_KEY%>">
 		<bean:write name="<%=IActionConstants.PAGE_SUBTITLE_KEY%>" />
