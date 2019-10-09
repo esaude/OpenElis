@@ -264,11 +264,7 @@ public class ResultsLoadUtility {
             }
         }
 
-        if (forwardSort) {
-            sortByAccessionAndSequence(selectedTestList);
-        } else {
-            reverseSortByAccessionAndSequence(selectedTestList);
-        }
+        sortByTestName(selectedTestList);
 
         setSampleGroupingNumbers(selectedTestList);
         addUserSelectionReflexes(selectedTestList);
@@ -316,11 +312,7 @@ public class ResultsLoadUtility {
             }
         }
 
-        if (forwardSort) {
-            sortByAccessionAndSequence(selectedTestList);
-        } else {
-            reverseSortByAccessionAndSequence(selectedTestList);
-        }
+        sortByTestName(selectedTestList);
 
         setSampleGroupingNumbers(selectedTestList);
         addUserSelectionReflexes(selectedTestList);
@@ -381,6 +373,29 @@ public class ResultsLoadUtility {
         Collections.sort(selectedTest, new Comparator<ResultItem>() {
             public int compare(ResultItem a, ResultItem b) {
                 int accessionSort = a.getSequenceAccessionNumber().compareTo(b.getSequenceAccessionNumber());
+
+                if (accessionSort == 0) {
+                    if (!GenericValidator.isBlankOrNull(a.getTestSortOrder()) && !GenericValidator.isBlankOrNull(b.getTestSortOrder())) {
+                        try {
+                            return Integer.parseInt(a.getTestSortOrder()) - Integer.parseInt(b.getTestSortOrder());
+                        } catch (NumberFormatException e) {
+                            return a.getTestName().compareTo(b.getTestName());
+                        }
+
+                    } else if (!GenericValidator.isBlankOrNull(a.getTestName()) && !GenericValidator.isBlankOrNull(b.getTestName())) {
+                        return a.getTestName().compareTo(b.getTestName());
+                    }
+                }
+
+                return accessionSort;
+            }
+        });
+    }
+
+    public void sortByTestName(List<? extends ResultItem> selectedTest) {
+        Collections.sort(selectedTest, new Comparator<ResultItem>() {
+            public int compare(ResultItem a, ResultItem b) {
+                int accessionSort = a.getTestName().compareTo(b.getTestName());
 
                 if (accessionSort == 0) {
                     if (!GenericValidator.isBlankOrNull(a.getTestSortOrder()) && !GenericValidator.isBlankOrNull(b.getTestSortOrder())) {
@@ -612,7 +627,7 @@ public class ResultsLoadUtility {
                     }
                 }
 
-        reverseSortByAccessionAndSequence(testList);
+        sortByTestName(testList);
         setSampleGroupingNumbers(testList);
         addUserSelectionReflexes(testList);
 
