@@ -15,7 +15,17 @@
 */
 
 package us.mn.state.health.lims.common.provider.query;
-
+import us.mn.state.health.lims.common.util.DateUtil;
+import us.mn.state.health.lims.common.util.SystemConfiguration;
+import us.mn.state.health.lims.common.valueholder.BaseObject;
+import us.mn.state.health.lims.common.valueholder.ValueHolder;
+import us.mn.state.health.lims.common.valueholder.ValueHolderInterface;
+import us.mn.state.health.lims.patientidentity.valueholder.PatientIdentity;
+import us.mn.state.health.lims.person.valueholder.Person;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import com.thoughtworks.xstream.XStream;
 import org.apache.commons.validator.GenericValidator;
 import us.mn.state.health.lims.address.dao.AddressPartDAO;
@@ -74,6 +84,11 @@ public class PatientXmlCreator {
 
         List<PatientIdentity> identityList = PatientUtil.getIdentityListForPatient(patient.getId());
 
+        Timestamp ts=patient.getBirthDate();  
+        Date date=ts;    
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); 
+        String dateOfBirth = formatter.format(date);   
+
         XMLUtil.appendKeyValue("ID", patient.getId(), xml);
         XMLUtil.appendKeyValue("nationalID", patient.getNationalId(), xml);
         XMLUtil.appendKeyValue("ST_ID", identityMap.getIdentityValue(identityList, "ST"), xml);
@@ -94,6 +109,8 @@ public class PatientXmlCreator {
         XMLUtil.appendKeyValue("insurance", identityMap.getIdentityValue(identityList, "INSURANCE"),xml);
         XMLUtil.appendKeyValue("occupation", identityMap.getIdentityValue(identityList, "OCCUPATION"), xml);
         XMLUtil.appendKeyValue("dob", patient.getBirthDateForDisplay(), xml);
+        XMLUtil.appendKeyValue("dateOfBirth", dateOfBirth, xml);
+        XMLUtil.appendKeyValue("cellPhone", person.getCellPhone(), xml);
         XMLUtil.appendKeyValue("commune", getAddress(person, ADDRESS_PART_COMMUNE_ID), xml);
         XMLUtil.appendKeyValue("addressDept", getAddress(person, ADDRESS_PART_DEPT_ID), xml);
         XMLUtil.appendKeyValue("motherInitial", identityMap.getIdentityValue(identityList, "MOTHERS_INITIAL"), xml);

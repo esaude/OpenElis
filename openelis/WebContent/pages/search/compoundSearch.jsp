@@ -265,7 +265,7 @@ jQuery(function(){
             <th><bean:message key="patient.epiFirstName"/></th>
             <th><bean:message key="patient.epiMiddleName"/></th>
         <% } %>
-		<th><%=StringUtil.getContextualMessageForKey("patient.search.all_IDs") %></th>
+		<th><%=StringUtil.getContextualMessageForKey("patient.nid") %></th>
 	</tr>
 	<tr >
 		<td headers="accession" >

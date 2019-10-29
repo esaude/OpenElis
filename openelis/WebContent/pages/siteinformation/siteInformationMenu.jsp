@@ -33,7 +33,7 @@
 	   		</td>
 	   		<% if( site.getValueType().equals("logoUpload")){ %>
 	   		<td class="textcontent">
-	   		    <img src="./images/labLogo.jpg?ver=<%= Math.random() %>" 
+	   		    <img src="./images/labLogo.png?ver=<%= Math.random() %>" 
 	   		         height="42" 
 	   		         width="42"  />
 	   		</td>

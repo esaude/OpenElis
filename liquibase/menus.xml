@@ -5,14 +5,14 @@
 	<changeSet author="marks" id="1" context="haiti" runOnChange="true">
 		<comment>Adds the menu items for Haiti</comment>
 		<delete schemaName="clinlims" tableName="menu" />
-		<insert schemaName="clinlims" tableName="menu">
+		<!-- <insert schemaName="clinlims" tableName="menu">
 			<column name="id" valueNumeric=" nextval( 'menu_seq' ) " />
 			<column name="presentation_order" valueNumeric="1" />
 			<column name="element_id" value="menu_home" />
 			<column name="action_url" value="/Dashboard.do" />
 			<column name="display_key" value="banner.menu.home" />
 			<column name="tool_tip_key" value="tooltip.bannner.menu.home" />
-		</insert>
+		</insert> -->
 
 		<insert schemaName="clinlims" tableName="menu">
 			<column name="id" valueNumeric=" nextval( 'menu_seq' ) " />
@@ -688,14 +688,14 @@
 		runOnChange="true">
 		<comment>Adds the menu items for Haiti LNSP</comment>
 		<delete schemaName="clinlims" tableName="menu" />
-		<insert schemaName="clinlims" tableName="menu">
+		<!-- <insert schemaName="clinlims" tableName="menu">
 			<column name="id" valueNumeric=" nextval( 'menu_seq' ) " />
 			<column name="presentation_order" valueNumeric="1" />
 			<column name="element_id" value="menu_home" />
 			<column name="action_url" value="/Dashboard.do" />
 			<column name="display_key" value="banner.menu.home" />
 			<column name="tool_tip_key" value="tooltip.bannner.menu.home" />
-		</insert>
+		</insert> -->
 		<insert schemaName="clinlims" tableName="menu">
 			<column name="id" valueNumeric=" nextval( 'menu_seq' ) " />
 			<column name="presentation_order" valueNumeric="2" />
@@ -1240,14 +1240,14 @@
 		runOnChange="true">
 		<comment>Adds the menu items for Cote d'Ivoire LNSP</comment>
 		<delete schemaName="clinlims" tableName="menu" />
-		<insert schemaName="clinlims" tableName="menu">
+		<!-- <insert schemaName="clinlims" tableName="menu">
 			<column name="id" valueNumeric=" nextval( 'menu_seq' ) " />
 			<column name="presentation_order" valueNumeric="1" />
 			<column name="element_id" value="menu_home" />
 			<column name="action_url" value="/Dashboard.do" />
 			<column name="display_key" value="banner.menu.home" />
 			<column name="tool_tip_key" value="tooltip.bannner.menu.home" />
-		</insert>
+		</insert> -->
 		<insert schemaName="clinlims" tableName="menu">
 			<column name="id" valueNumeric=" nextval( 'menu_seq' ) " />
 			<column name="presentation_order" valueNumeric="2" />
@@ -1691,14 +1691,14 @@
 		runOnChange="true">
 		<comment>Adds the menu items for Cote d'Ivoire LNSP</comment>
 		<delete schemaName="clinlims" tableName="menu" />
-		<insert schemaName="clinlims" tableName="menu">
+		<!-- <insert schemaName="clinlims" tableName="menu">
 			<column name="id" valueNumeric=" nextval( 'menu_seq' ) " />
 			<column name="presentation_order" valueNumeric="1" />
 			<column name="element_id" value="menu_home" />
 			<column name="action_url" value="/Dashboard.do" />
 			<column name="display_key" value="banner.menu.home" />
 			<column name="tool_tip_key" value="tooltip.bannner.menu.home" />
-		</insert>
+		</insert> -->
 		<insert schemaName="clinlims" tableName="menu">
 			<column name="id" valueNumeric=" nextval( 'menu_seq' ) " />
 			<column name="presentation_order" valueNumeric="2" />
@@ -2172,14 +2172,14 @@
 		runOnChange="true">
 		<comment>Adds the menu items for RetroCI</comment>
 		<delete schemaName="clinlims" tableName="menu" />
-		<insert schemaName="clinlims" tableName="menu">
+		<!-- <insert schemaName="clinlims" tableName="menu">
 			<column name="id" valueNumeric=" nextval( 'menu_seq' ) " />
 			<column name="presentation_order" valueNumeric="1" />
 			<column name="element_id" value="menu_home" />
 			<column name="action_url" value="/Dashboard.do" />
 			<column name="display_key" value="banner.menu.home" />
 			<column name="tool_tip_key" value="tooltip.bannner.menu.home" />
-		</insert>
+		</insert> -->
 
 		<insert schemaName="clinlims" tableName="menu">
 			<column name="id" valueNumeric=" nextval( 'menu_seq' ) " />

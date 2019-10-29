@@ -158,7 +158,7 @@ public class PatientPersisterTest {
         csvPatient.firstName = "firstName";
         csvPatient.registrationNumber = "12345";
         csvPatient.gender = VALID_GENDER_TYPE;
-        patientPersister.setStNumberFormat("/([a-zA-Z]*)(\\d+\\/\\d+)/");
+        patientPersister.setStNumberFormat("\\d{3}");
 
         RowResult<CSVPatient> rowResultForValidPatient = patientPersister.validate(csvPatient);
 
@@ -166,7 +166,7 @@ public class PatientPersisterTest {
 
         String[] rowWithErrorColumn = rowResultForValidPatient.getRowWithErrorColumn();
         String errorMessage = rowWithErrorColumn[rowWithErrorColumn.length - 1];
-        Assert.assertTrue(errorMessage.contains("PatientID does not conform to the allowed format."));
+        Assert.assertTrue(errorMessage.contains("PatientID does not confirm to the allowed format."));
 
     }
 
@@ -194,7 +194,7 @@ public class PatientPersisterTest {
     }
 
     public class TestablePatientPersister extends PatientPersister{
-        private String stNumberFormat = "/([a-zA-Z]*)(\\d+)/";
+        private String stNumberFormat = "\\d{3}";
 
         public TestablePatientPersister(AuditingService auditingService, PersonDAO personDAO,PersonAddressDAO personAddressDAO, PatientDAO patientDAO,PatientIdentityDAO patientIdentityDAO, PatientIdentityTypeDAO patientIdentityTypeDAO, GenderDAO genderDao) {
             super(auditingService, personDAO, personAddressDAO, patientDAO, patientIdentityDAO, patientIdentityTypeDAO, genderDao);

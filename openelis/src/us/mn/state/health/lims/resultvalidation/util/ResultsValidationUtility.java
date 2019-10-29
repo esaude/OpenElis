@@ -749,6 +749,7 @@ public class ResultsValidationUtility {
 		List<AnalysisItem> analysisResultList = new ArrayList<AnalysisItem>();
 
 		reverseSortByAccessionAndSequence(testResultList);
+        sortByTestName(testResultList);
 
 		for (ResultValidationItem tResultItem : testResultList) {
 			String uploadedFilePath = null;
@@ -786,6 +787,30 @@ public class ResultsValidationUtility {
 			}
 		});
 	}
+
+    private static void sortByTestName(List<ResultValidationItem> testResultList) {
+        Collections.sort(testResultList, new Comparator<ResultValidationItem>(){
+            @Override
+            public int compare(ResultValidationItem a, ResultValidationItem b) {
+                int accessionSort = a.getTestName().compareTo(b.getTestName());
+
+                if (accessionSort == 0) {
+                    if (!GenericValidator.isBlankOrNull(a.getTestSortNumber()) && !GenericValidator.isBlankOrNull(b.getTestSortNumber())) {
+                        try {
+                            return Integer.parseInt(a.getTestSortNumber()) - Integer.parseInt(b.getTestSortNumber());
+                        } catch (NumberFormatException e) {
+                            return a.getTestName().compareTo(b.getTestName());
+                        }
+
+                    } else {
+                        return a.getTestName().compareTo(b.getTestName());
+                    }
+                }
+
+                return accessionSort;
+            }
+        });
+    }
 
 	private RecordStatus getSampleRecordStatus(Sample sample) {
 

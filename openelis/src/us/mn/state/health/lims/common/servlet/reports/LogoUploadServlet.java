@@ -37,8 +37,8 @@ public class LogoUploadServlet extends HttpServlet {
 
     static final long serialVersionUID = 1L;
     
-    private static final String FILE_PATH = File.separator + "WEB-INF" + File.separator + "reports" + File.separator + "images" + File.separator + "labLogo.jpg";
-    private static final String PREVIEW_FILE_PATH = File.separator + "images" + File.separator + "labLogo.jpg";
+    private static final String FILE_PATH = File.separator + "WEB-INF" + File.separator + "reports" + File.separator + "images" + File.separator + "labLogo.png";
+    private static final String PREVIEW_FILE_PATH = File.separator + "images" + File.separator + "labLogo.png";
     private static final int MAX_MEMORY_SIZE = 1024 * 1024 * 2;
     private static final int MAX_REQUEST_SIZE = 1024 * 1024;
  

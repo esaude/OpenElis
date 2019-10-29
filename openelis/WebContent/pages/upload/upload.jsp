@@ -46,7 +46,13 @@ basePath = path + "/";
 <script type="text/javascript" src="<%=basePath%>scripts/dashBoard/createGrid.js"></script>
 <script type="text/javascript" src="<%=basePath%>scripts/utils.js"></script>
 <script type="text/javascript" src="<%=basePath%>scripts/slickgrid/slick.autotooltips.js"></script>
-
+<style>
+		#upload_button {
+		  display: inline-block;
+		}
+		#upload_button input[type=file] {
+		  display:none;
+		}</style>
 <div>
     <h1><bean:message key="result.uploadedFile"/></h1>
     <div id="upload">
@@ -54,7 +60,14 @@ basePath = path + "/";
             <table>
                 <tr>
                 <td><button type="button" id="refresh"><bean:message key="upload.refresh"/></button></td>
-                <td><input type="file" name="file" value="test_results_Upload_Template.csv"></td>
+                <td>
+                        <div id="upload_button" style="width:160px; border: 1px solid;border-color: rgba(0,0,255,0.25);border-radius: 5px; background-color: #e7e7e7; color: black; height: 20px; text-align: center;padding-top: 4px;">
+                                <label>
+                                  <input type="file" name=file value="test_results_Upload_Template.csv">
+                                  <span class="btn btn btn-lg" >Escolha o ficheiro</span>
+                                </label>
+                              </div>
+                     </td>
                 <td><span><input type="radio" name="importType" value="patient" checked="checked"><bean:message key="upload.patient"/></span></td>
                 <td><span><input type="radio" name="importType" value="sample"><bean:message key="upload.sample"/></span> </td>
                 <td><input type="submit" value='<bean:message key="upload.upload"/>'>  </td>

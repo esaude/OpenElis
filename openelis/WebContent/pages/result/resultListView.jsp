@@ -106,7 +106,13 @@
 
 <link rel="stylesheet" type="text/css" href="css/jquery.asmselect.css?ver=<%= Versioning.getBuildNumber() %>" />
 
-
+<style>
+#upload_button {
+  display: inline-block;
+}
+#upload_button input[type=file] {
+  display:none;
+}</style>
 <script type="text/javascript" >
 
 <% if( ConfigurationProperties.getInstance().isPropertyValueEqual(Property.alertForInvalidResults, "true")){%>
@@ -535,7 +541,7 @@ function /*void*/ processTestReflexCD4Success(xhr)
 	<% } %>
 
 	&nbsp;
-	<bean:write name="<%=formName%>" property="paging.currentPage"/> of
+	<bean:write name="<%=formName%>" property="paging.currentPage"/> de
 	<bean:write name="<%=formName%>" property="paging.totalPages"/>
 	<div class='textcontent' style="float: right" >
 	<span style="visibility: hidden" id="searchNotFound"><em><%= StringUtil.getMessageForKey("search.term.notFound") %></em></span>
@@ -953,7 +959,13 @@ function /*void*/ processTestReflexCD4Success(xhr)
 			<html:hidden property="hideShowFlag"  styleId='<%="hideShow_" + index %>' value="hidden" />
 		</td>
         <td>
-            <input type="file" name='<%="testResult["+index+"].uploadedFile"%>' onchange='<%="markUpdated(" + index + ");"%>'>
+				<div id="upload_button" style="width:160px; border: 1px solid;border-color: rgba(0,0,255,0.25);border-radius: 5px; background-color: #e7e7e7; color: black; height: 20px; text-align: center;padding-top: 4px;">
+						<label>
+						  <input type="file" ngf-select ng-model="new_files" ng-change="fs.uploadFiles(new_files)" multiple name='<%="testResult["+index+"].uploadedFile"%>' onchange='<%="markUpdated(" + index + ");"%>'>
+						  <span class="btn btn btn-lg" >Escolha o ficheiro</span>
+						</label>
+					  </div>
+            <!-- <input type="file" name='<%="testResult["+index+"].uploadedFile"%>' onchange='<%="markUpdated(" + index + ");"%>' value="dskfn"> -->
             <% if(testResult.getUploadedFileName() != null){ %>
                     <%  String filePath = testResult.getUploadedFileName();
                         String fileNameWithUUID = filePath.substring(filePath.lastIndexOf("/") + 1);
@@ -1046,7 +1058,7 @@ function /*void*/ processTestReflexCD4Success(xhr)
 	<% } %>
 
 	&nbsp;
-	<bean:write name="<%=formName%>" property="paging.currentPage"/> of
+	<bean:write name="<%=formName%>" property="paging.currentPage"/> de
 	<bean:write name="<%=formName%>" property="paging.totalPages"/>
 </logic:notEqual>
 </div>
